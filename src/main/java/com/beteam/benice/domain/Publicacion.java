@@ -2,6 +2,7 @@ package com.beteam.benice.domain;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +43,15 @@ public class Publicacion implements Serializable {
 	  name = "likes", 
 	  joinColumns = @JoinColumn(name = "publicacion_id", referencedColumnName = "publicacion_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id"))
-	private List<Usuario> like_usuarios;
+	private Set<Usuario> like_usuarios;
+	
+	public Set<Usuario> getLike_usuarios() {
+		return like_usuarios;
+	}
+	
+	public void setLike_usuarios(Set<Usuario> like_usuarios) {
+		this.like_usuarios = like_usuarios;
+	}
 
 	@Column(name = "imagen_url")
 	private String imagen_url;
@@ -96,13 +105,7 @@ public class Publicacion implements Serializable {
 		this.imagen_url = imagen_url;
 	}
 
-	public List<Usuario> getLike_usuarios() {
-		return like_usuarios;
-	}
 
-	public void setLike_usuarios(List<Usuario> like_usuarios) {
-		this.like_usuarios = like_usuarios;
-	}
 
 	
 	

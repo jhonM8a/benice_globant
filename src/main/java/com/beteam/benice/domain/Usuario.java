@@ -2,6 +2,7 @@ package com.beteam.benice.domain;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,21 +35,21 @@ public class Usuario implements Serializable{
 	@Column(name = "correo")
 	private String correo;
 	
-	@OneToMany(mappedBy = "usuarios")
+	@OneToMany(mappedBy = "usuario")
     private List<Publicacion> publicaciones;
 	
 	@ManyToMany
 	@JoinTable(
 	  name = "likes", 
-	  joinColumns = @JoinColumn(name = "publicacion_id", referencedColumnName = "publicacion_id"), 
-	  inverseJoinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id"))
-	private List<Publicacion> like_publicaciones;
+	  joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "publicacion_id", referencedColumnName = "publicacion_id"))
+	private Set<Publicacion> like_publicaciones;
 
-	public List<Publicacion> getLikePublicaciones() {
+	public Set<Publicacion> getLikePublicaciones() {
 		return like_publicaciones;
 	}
 
-	public void setLikePublicaciones(List<Publicacion> likePublicaciones) {
+	public void setLikePublicaciones(Set<Publicacion> likePublicaciones) {
 		this.like_publicaciones = likePublicaciones;
 	}
 
