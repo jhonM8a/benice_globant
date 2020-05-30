@@ -21,7 +21,7 @@ public class Ubicacion implements Serializable {
 	@Column(name = "nombre")
 	private String nombre;
 	
-	@OneToMany(mappedBy = "ubicaciones")
+	@OneToMany(mappedBy = "ubicacion")
     private List<Publicacion> publicaciones;
 
 	public List<Publicacion> getPublicaciones() {

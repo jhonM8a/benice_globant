@@ -26,7 +26,7 @@ public class Tema implements Serializable {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
-	@OneToMany(mappedBy = "temas")
+	@OneToMany(mappedBy = "tema")
     private List<Publicacion> publicaciones;
 	
 
