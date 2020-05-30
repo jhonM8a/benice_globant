@@ -9,13 +9,13 @@ public class Publication implements Serializable{
 
 	private String Description;
 	
-	private String tag;
+	private String tema;
 	
-	private String photo;
+	private String imagen;
 	
 	private Long point;
 	
-	private String location;
+	private String ubicacion;
 	
 	public String getDescription() {
 		return Description;
@@ -25,20 +25,20 @@ public class Publication implements Serializable{
 		Description = description;
 	}
 
-	public String getTag() {
-		return tag;
+	public String getTema() {
+		return tema;
 	}
 
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setTema(String tema) {
+		this.tema = tema;
 	}
 
-	public String getPhoto() {
-		return photo;
+	public String getImagen() {
+		return imagen;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	public Long getPoint() {
@@ -49,11 +49,11 @@ public class Publication implements Serializable{
 		this.point = point;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getUbicacion() {
+		return ubicacion;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
 	}
 }
