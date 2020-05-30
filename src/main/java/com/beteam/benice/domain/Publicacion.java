@@ -96,6 +96,14 @@ public class Publicacion implements Serializable {
 		this.imagen_url = imagen_url;
 	}
 
+	public List<Usuario> getLike_usuarios() {
+		return like_usuarios;
+	}
+
+	public void setLike_usuarios(List<Usuario> like_usuarios) {
+		this.like_usuarios = like_usuarios;
+	}
+
 	
 	
 	
