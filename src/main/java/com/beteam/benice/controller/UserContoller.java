@@ -18,9 +18,14 @@ public class UserContoller {
 	private UserService userService;
 
 	@PostMapping("/user/auth")
-	public SessionBeNice authUser(@RequestBody UserAuthRequest user) {
+	public SessionBeNice authUser(@RequestBody UserAuthRequest userRequest) {
 
-		return userService.getDataUser(user);
+		return userService.getDataUser(userRequest);
 	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	
 	
 }
