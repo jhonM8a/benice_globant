@@ -19,7 +19,7 @@ public class UserServieImpl implements UserService{
 		SessionBeNice sessionBeNice = new SessionBeNice();
 		
 		Usuario usuario = usuarioDao.getUsuarioByUserName(userRequest.getUser(), userRequest.getPassword());
-		
+		sessionBeNice.setName(usuario.getNombre());
 		
 		return sessionBeNice;
 	}

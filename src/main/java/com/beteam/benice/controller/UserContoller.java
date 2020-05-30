@@ -23,9 +23,4 @@ public class UserContoller {
 		return userService.getDataUser(userRequest);
 	}
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-	
-	
 }
