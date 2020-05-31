@@ -23,7 +23,7 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao{
 	@Override
 	public List<Publicacion> getPubicaciones() {
 	
-		return getSession().createQuery("from Publicaion").list();
+		return getSession().createQuery("from Publicacion").list();
 	}
 
 }

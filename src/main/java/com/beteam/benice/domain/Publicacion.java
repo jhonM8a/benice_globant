@@ -1,7 +1,6 @@
 package com.beteam.benice.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,6 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "publicaciones")
@@ -43,6 +44,7 @@ public class Publicacion implements Serializable {
 	  name = "likes", 
 	  joinColumns = @JoinColumn(name = "publicacion_id", referencedColumnName = "publicacion_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id"))
+	 @JsonManagedReference
 	private Set<Usuario> like_usuarios;
 	
 	public Set<Usuario> getLike_usuarios() {

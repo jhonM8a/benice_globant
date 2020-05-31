@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "usuarios")
 public class Usuario implements Serializable{
@@ -43,6 +45,7 @@ public class Usuario implements Serializable{
 	  name = "likes", 
 	  joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "publicacion_id", referencedColumnName = "publicacion_id"))
+	 @JsonManagedReference
 	private Set<Publicacion> like_publicaciones;
 
 	public Set<Publicacion> getLikePublicaciones() {
