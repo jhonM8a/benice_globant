@@ -24,6 +24,17 @@ public class Tema implements Serializable {
 	@Transient
 	private Long usuario_logeado_id;
 	
+	@Transient
+	private Long likes;
+	
+	public Long getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Long likes) {
+		this.likes = likes;
+	}
+
 	public Long getUsuario_logeado_id() {
 		return usuario_logeado_id;
 	}
