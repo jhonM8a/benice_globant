@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,8 +25,18 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Publicacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	
+	@Transient
 	private Long count_likes;
+
+
+
+	public Long getCount_likes() {
+		return count_likes;
+	}
+
+	public void setCount_likes(Long count_likes) {
+		this.count_likes = count_likes;
+	}
 
 	@Id
 	@Column(name = "publicacion_id")
@@ -163,14 +174,7 @@ public class Publicacion implements Serializable {
 	public void setFecha_registro(Date fecha_registro) {
 		this.fecha_registro = fecha_registro;
 	}
-	
-	public Long getCount_likes() {
-		return count_likes;
-	}
 
-	public void setCount_likes(Long count_likes) {
-		this.count_likes = count_likes;
-	}
 	
 
 }
