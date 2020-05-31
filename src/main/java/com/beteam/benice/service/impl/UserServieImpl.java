@@ -44,7 +44,9 @@ public class UserServieImpl implements UserService{
 			publication.setImagen(publicacion.getImagen_url());
 			publication.setTema(publicacion.getTema().getTitulo());
 			publication.setUbicacion(publicacion.getUbicacion().getNombre());
-			publication.setPoint(publicacion.getLike_usuarios().size());
+			publication.setLikes(publicacion.getLike_usuarios().size());
+			publication.setUsuario(publicacion.getUsuario().getNombre());
+			publication.setUsuario_id(publicacion.getUsuario().getUsuario_id());
 			publications.add(publication);
 		}
 		

@@ -13,9 +13,13 @@ public class Publication implements Serializable{
 	
 	private String imagen;
 	
-	private int point;
+	private int likes;
 	
 	private String ubicacion;
+	
+	private String usuario;
+	
+	private Long usuario_id;
 	
 	public String getDescription() {
 		return Description;
@@ -41,12 +45,12 @@ public class Publication implements Serializable{
 		this.imagen = imagen;
 	}
 
-	public int getPoint() {
-		return point;
+	public int getLikes() {
+		return likes;
 	}
 
-	public void setPoint(int point) {
-		this.point = point;
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 
 	public String getUbicacion() {
@@ -55,5 +59,21 @@ public class Publication implements Serializable{
 
 	public void setUbicacion(String ubicacion) {
 		this.ubicacion = ubicacion;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public Long getUsuario_id() {
+		return usuario_id;
+	}
+
+	public void setUsuario_id(Long usuario_id) {
+		this.usuario_id = usuario_id;
 	}
 }
