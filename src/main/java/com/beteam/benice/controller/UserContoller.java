@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.domain.Usuario;
+import com.beteam.benice.domain.Like;
+import com.beteam.benice.domain.Publicacion;
+import com.beteam.benice.model.Publication;
+import com.beteam.benice.model.SessionBeNice;
 import com.beteam.benice.model.UserAuthRequest;
 import com.beteam.benice.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -57,6 +61,20 @@ public class UserContoller {
 	public Object createPublication(@RequestBody Publicacion publicacionRequest) {
 		
 		return userService.createPublication(publicacionRequest);
+	}
+	
+	@PostMapping("/like_user")
+	public Object setLikeUser(@RequestBody Like likeUserRequest) {
+		
+		System.out.println(likeUserRequest.getUsuario_id());
+		return userService.createLikeUser(likeUserRequest);
+	}
+	
+	@DeleteMapping("/dislike_user")
+	public Object setDislikeUser(@RequestBody Like likeUserRequest) {
+		
+		System.out.println(likeUserRequest.getUsuario_id());
+		return userService.deleteLikeUser(likeUserRequest);
 	}
 
 	@PostMapping("/user")

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.beteam.benice.dao.UsuarioDao;
+import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.domain.Usuario;
 
@@ -27,7 +28,7 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 
 	@Override
 	public void updateUsuario(Usuario usuarioDomain) {
-		
+
 		Session session = getSession();
 		session.beginTransaction();
 
@@ -60,22 +61,44 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 	public Publicacion getPublicacionById(Long publicacion_id) {
 
 		return (Publicacion) getSession().createQuery("from Publicacion where publicacion_id = :publicacion_id")
-				.setParameter("publicacion_id", publicacion_id)
-				.uniqueResult();
+				.setParameter("publicacion_id", publicacion_id).uniqueResult();
 	}
 
 	@Override
 	public void deletePublicacion(Publicacion publicacion) {
 		Session session = getSession();
 		session.beginTransaction();
-		
+
 		session.delete(publicacion);
-		
 
 		session.getTransaction().commit();
 		session.close();
 
-		
+	}
+
+	public Long createLikeUser(Like likeUserRequest) {
+
+		Session session = getSession();
+		session.beginTransaction();
+
+		getSession().save(likeUserRequest);
+
+		session.getTransaction().commit();
+		session.close();
+		return (long) 1;
+	}
+
+	@Override
+	public Long deleteLikeUser(Like likeUserRequest) {
+		Session session = getSession();
+		session.beginTransaction();
+
+		getSession().delete(likeUserRequest);
+
+		session.getTransaction().commit();
+		session.close();
+
+		return (long) 1;
 	}
 
 }

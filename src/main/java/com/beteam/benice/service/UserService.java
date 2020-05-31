@@ -2,6 +2,7 @@ package com.beteam.benice.service;
 
 import java.util.List;
 
+import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.domain.Usuario;
 import com.beteam.benice.model.UserAuthRequest;
@@ -9,7 +10,6 @@ import com.beteam.benice.model.UserAuthRequest;
 public interface UserService {
 
 	public Usuario getDataUser(UserAuthRequest user);
-
 
 	public void updateUser(Usuario usuario);
 
@@ -21,6 +21,9 @@ public interface UserService {
 
 	public Object createPublication(Publicacion publicacionRequest);
 
-
 	public void deletePublicationById(Long publicacion_id);
+
+	public Object createLikeUser(Like likeUserRequest);
+
+	public Object deleteLikeUser(Like likeUserRequest);
 }
