@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.beteam.benice.model.Publication;
-import com.beteam.benice.model.SessionBeNice;
+import com.beteam.benice.domain.Publicacion;
+import com.beteam.benice.domain.Usuario;
 import com.beteam.benice.model.UserAuthRequest;
-import com.beteam.benice.model.UserRequest;
 import com.beteam.benice.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,7 +24,7 @@ public class UserContoller {
 	private UserService userService;
 
 	@PostMapping("/user/auth")
-	public SessionBeNice authUser(@RequestBody UserAuthRequest userRequest) {
+	public Usuario authUser(@RequestBody UserAuthRequest userRequest) {
 
 		return userService.getDataUser(userRequest);
 	}
@@ -37,7 +36,7 @@ public class UserContoller {
 	
 	@GetMapping("/publicaciones")
 	@JsonIgnore
-	public List<Publication> getPublicaciones() {
+	public List<Publicacion> getPublicaciones() {
 
 		//userService.getPublicaciones()
 		return userService.getPublicaciones();
@@ -45,17 +44,23 @@ public class UserContoller {
 	
 	
 	@PutMapping("/user")
-	public void updateUser(@RequestBody UserRequest usuario) {
+	public void updateUser(@RequestBody Usuario usuario) {
 		userService.updateUser(usuario);
 	}
 	
 	@PostMapping("/user/historys")
-	public  List<Publication> getHistoryByUser(@RequestBody UserRequest usuario){
+	public  List<Publicacion> getHistoryByUser(@RequestBody Usuario usuario){
 		return userService.getHistoryByUser(usuario.getUsuario_id());
+	}
+	
+	@PostMapping("/publicacion")
+	public Object createPublication(@RequestBody Publicacion publicacionRequest) {
+		
+		return userService.createPublication(publicacionRequest);
 	}
 
 	@PostMapping("/user")
-	public void createUser(@RequestBody UserRequest usuario) {
+	public void createUser(@RequestBody Usuario usuario) { 
 		userService.createUser(usuario);
 	}
 }

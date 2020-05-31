@@ -6,7 +6,7 @@ import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.domain.Usuario;
 
 public interface UsuarioDao {
-	
+
 	public Usuario getUsuarioByUserName(String usuerName, String password);
 
 	public List<Publicacion> getPubicaciones();
@@ -16,4 +16,6 @@ public interface UsuarioDao {
 	public List<Publicacion> getHistoryByUser(Long usuario_id);
 
 	public void createUser(Usuario usuarioDomain);
+
+	public long createPublicacion(Publicacion publicacionRequest);
 }
