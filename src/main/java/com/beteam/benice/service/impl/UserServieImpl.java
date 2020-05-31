@@ -27,10 +27,10 @@ public class UserServieImpl implements UserService{
 	}
 
 	@Override
-	public List<Publicacion> getPublicaciones(Usuario usuarioRequest) {
+	public List<Publicacion> getPublicaciones(Long usuario_id) {
 		
 
-		List<Publicacion>   publicaciones = usuarioDao.getPubicaciones(usuarioRequest);
+		List<Publicacion>   publicaciones = usuarioDao.getPubicaciones(usuario_id);
 		
 		return publicaciones;
 	}

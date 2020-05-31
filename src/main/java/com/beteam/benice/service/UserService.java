@@ -18,7 +18,7 @@ public interface UserService {
 
 	public void createUser(Usuario usuario);
 
-	public List<Publicacion> getPublicaciones(Usuario usuarioRequest);
+	public List<Publicacion> getPublicaciones(Long usuario_id);
 
 	public Object createPublication(Publicacion publicacionRequest);
 
