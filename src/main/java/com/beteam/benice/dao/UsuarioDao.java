@@ -10,4 +10,10 @@ public interface UsuarioDao {
 	public Usuario getUsuarioByUserName(String usuerName, String password);
 
 	public List<Publicacion> getPubicaciones();
+
+	public void updateUsuario(Usuario usuarioDomain);
+
+	public List<Publicacion> getHistoryByUser(Long usuario_id);
+
+	public void createUser(Usuario usuarioDomain);
 }

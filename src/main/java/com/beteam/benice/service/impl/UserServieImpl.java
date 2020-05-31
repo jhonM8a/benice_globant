@@ -12,6 +12,7 @@ import com.beteam.benice.domain.Usuario;
 import com.beteam.benice.model.Publication;
 import com.beteam.benice.model.SessionBeNice;
 import com.beteam.benice.model.UserAuthRequest;
+import com.beteam.benice.model.UserRequest;
 import com.beteam.benice.service.UserService;
 
 @Service
@@ -24,7 +25,12 @@ public class UserServieImpl implements UserService{
 		SessionBeNice sessionBeNice = new SessionBeNice();
 		
 		Usuario usuario = usuarioDao.getUsuarioByUserName(userRequest.getUser(), userRequest.getPassword());
-		sessionBeNice.setName(usuario.getNombre());
+		
+		sessionBeNice.setUsuario_id(usuario.getUsuario_id());
+		sessionBeNice.setUserName(usuario.getUserName());
+		sessionBeNice.setPassword(usuario.getPassword());
+		sessionBeNice.setNombre(usuario.getNombre());
+		sessionBeNice.setCorreo(usuario.getCorreo());
 		
 		return sessionBeNice;
 	}
@@ -52,5 +58,56 @@ public class UserServieImpl implements UserService{
 		
 		
 		return publications;
+	}
+
+	@Override
+	public void updateUser(UserRequest usuario) {
+		
+		Usuario usuarioDomain = new Usuario();
+		
+		usuarioDomain.setUsuario_id(usuario.getUsuario_id());
+		usuarioDomain.setUserName(usuario.getUserName());
+		usuarioDomain.setNombre(usuario.getNombre());
+		usuarioDomain.setCorreo(usuario.getCorreo());
+		usuarioDomain.setPassword(usuario.getPassword_());
+		
+		usuarioDao.updateUsuario(usuarioDomain);
+				
+	}
+
+	@Override
+	public List<Publication> getHistoryByUser(Long usuario_id) {
+		
+		List<Publicacion> publicacionesDomain = usuarioDao.getHistoryByUser(usuario_id);
+		List<Publication> publicationResponses = new ArrayList<Publication>();
+		
+		for (Publicacion publication : publicacionesDomain) {
+			
+			Publication publicationResponse = new Publication();
+			publicationResponse.setDescription(publication.getDescripcion());
+			publicationResponse.setImagen(publication.getImagen_url());
+			publicationResponse.setTema(publication.getTema().getTitulo());
+			publicationResponse.setUbicacion(publication.getUbicacion().getNombre());
+			publicationResponse.setLikes(publication.getLike_usuarios().size());
+			publicationResponse.setUsuario(publication.getUsuario().getNombre());
+			publicationResponse.setUsuario_id(publication.getUsuario().getUsuario_id());
+			
+			publicationResponses.add(publicationResponse);
+		}
+		
+		return publicationResponses;
+	}
+
+	@Override
+	public void createUser(UserRequest usuario) {
+		Usuario usuarioDomain = new Usuario();
+		
+		usuarioDomain.setUserName(usuario.getUserName());
+		usuarioDomain.setPassword(usuario.getPassword_());
+		usuarioDomain.setNombre(usuario.getNombre());
+		usuarioDomain.setCorreo(usuario.getCorreo());
+	
+		usuarioDao.createUser(usuarioDomain);
+		
 	}
 }

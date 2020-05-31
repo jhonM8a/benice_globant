@@ -8,16 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.beteam.benice.domain.Usuario;
-
-import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.model.Publication;
 import com.beteam.benice.model.SessionBeNice;
 import com.beteam.benice.model.UserAuthRequest;
+import com.beteam.benice.model.UserRequest;
 import com.beteam.benice.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -49,8 +45,17 @@ public class UserContoller {
 	
 	
 	@PutMapping("/user")
-	public void updateUser(@RequestBody Usuario usuario) {
-		System.out.println(usuario.getCorreo());
+	public void updateUser(@RequestBody UserRequest usuario) {
+		userService.updateUser(usuario);
+	}
+	
+	@PostMapping("/user/historys")
+	public  List<Publication> getHistoryByUser(@RequestBody UserRequest usuario){
+		return userService.getHistoryByUser(usuario.getUsuario_id());
 	}
 
+	@PostMapping("/user")
+	public void createUser(@RequestBody UserRequest usuario) {
+		userService.createUser(usuario);
+	}
 }

@@ -1,12 +1,11 @@
 package com.beteam.benice.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class SessionBeNice implements Serializable{
 
-	private static final long serialVersionUID = 1L;
 
+public class UserRequest implements Serializable{
+	
 
 	private Long usuario_id;
 	
@@ -14,7 +13,7 @@ public class SessionBeNice implements Serializable{
 	private String userName;
 	
 
-	private String password;
+	private String password_;
 	
 
 	private String nombre;
@@ -33,8 +32,8 @@ public class SessionBeNice implements Serializable{
 	}
 
 
-	public String getPassword() {
-		return password;
+	public String getPassword_() {
+		return password_;
 	}
 
 
@@ -58,8 +57,8 @@ public class SessionBeNice implements Serializable{
 	}
 
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword_(String password_) {
+		this.password_ = password_;
 	}
 
 
@@ -71,8 +70,4 @@ public class SessionBeNice implements Serializable{
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-
-	
-
 }
-
