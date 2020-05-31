@@ -76,7 +76,7 @@ public class UserContoller {
 		return userService.createLikeUser(likeUserRequest);
 	}
 	
-	@DeleteMapping("/dislike_user")
+	@PostMapping("/dislike_user")
 	public Object setDislikeUser(@RequestBody Like likeUserRequest) {
 		
 		System.out.println(likeUserRequest.getUsuario_id());
