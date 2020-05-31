@@ -39,9 +39,9 @@ public class UserContoller {
 	
 	@GetMapping("/publicaciones")
 	@JsonIgnore
-	public List<Publicacion> getPublicaciones() {
+	public List<Publicacion> getPublicaciones(@RequestBody Usuario usuarioRequest) {
 
-		return userService.getPublicaciones();
+		return userService.getPublicaciones(usuarioRequest);
 	}
 	
 	@GetMapping("/publicaciones_por_tema")
