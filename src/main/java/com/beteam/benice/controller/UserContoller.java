@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
+import com.beteam.benice.domain.Tema;
 import com.beteam.benice.domain.Usuario;
 import com.beteam.benice.model.UserAuthRequest;
 import com.beteam.benice.service.UserService;
@@ -41,6 +42,13 @@ public class UserContoller {
 	public List<Publicacion> getPublicaciones() {
 
 		return userService.getPublicaciones();
+	}
+	
+	@GetMapping("/publicaciones_por_tema")
+	@JsonIgnore
+	public List<Publicacion> getPublicacionesPorTema(@RequestBody Tema temaRequest) {
+
+		return userService.getPublicacionesPorTema(temaRequest);
 	}
 	
 	

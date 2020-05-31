@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.beteam.benice.dao.UsuarioDao;
 import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
+import com.beteam.benice.domain.Tema;
 import com.beteam.benice.domain.Usuario;
 
 @Repository
@@ -109,6 +110,25 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 		session.close();
 
 		return (long) 1;
+	}
+
+	@Override
+	public List<Publicacion> getPublicacionesPorTema(Tema temaRequest) {
+		
+		
+		List<Publicacion> publicaciones = getSession().createQuery("from Publicacion where tema_id = :tema_id")
+											.setParameter("tema_id", temaRequest.getTema_id()).list();
+		for (Publicacion publicacion : publicaciones) {
+			
+			long count_likes = (long) getSession().createQuery("select count(*) from Like where publicacion_id = :publicacion_id")
+					.setParameter("publicacion_id", publicacion.getPublicacion_id()).uniqueResult();
+					
+			publicacion.setCount_likes(count_likes);
+		}
+		
+		return publicaciones;
+		
+		
 	}
 
 }
