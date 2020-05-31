@@ -43,12 +43,11 @@ public class UserContoller {
 	@JsonIgnore
 	public List<Publicacion> getPublicaciones() {
 
-		//userService.getPublicaciones()
 		return userService.getPublicaciones();
 	}
 	
 	
-	@PutMapping("/user")
+	@PutMapping("/user") 
 	public void updateUser(@RequestBody Usuario usuario) {
 		userService.updateUser(usuario);
 	}
@@ -81,5 +80,10 @@ public class UserContoller {
 	@PostMapping("/user")
 	public void createUser(@RequestBody Usuario usuario) { 
 		userService.createUser(usuario);
+	}
+	
+	@DeleteMapping("/user")
+	public void deletePublicationById(@RequestBody Publicacion publicacion) {
+		userService.deletePublicationById(publicacion.getPublicacion_id());
 	}
 }

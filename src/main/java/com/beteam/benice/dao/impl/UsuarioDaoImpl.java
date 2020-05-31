@@ -28,6 +28,7 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 
 	@Override
 	public void updateUsuario(Usuario usuarioDomain) {
+
 		Session session = getSession();
 		session.beginTransaction();
 
@@ -57,16 +58,34 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 	}
 
 	@Override
+	public Publicacion getPublicacionById(Long publicacion_id) {
+
+		return (Publicacion) getSession().createQuery("from Publicacion where publicacion_id = :publicacion_id")
+				.setParameter("publicacion_id", publicacion_id).uniqueResult();
+	}
+
+	@Override
+	public void deletePublicacion(Publicacion publicacion) {
+		Session session = getSession();
+		session.beginTransaction();
+
+		session.delete(publicacion);
+
+		session.getTransaction().commit();
+		session.close();
+
+	}
+
 	public Long createLikeUser(Like likeUserRequest) {
-		
+
 		Session session = getSession();
 		session.beginTransaction();
 
 		getSession().save(likeUserRequest);
 
-        session.getTransaction().commit();
-        session.close();
-        return (long) 1;		
+		session.getTransaction().commit();
+		session.close();
+		return (long) 1;
 	}
 
 	@Override
@@ -76,13 +95,10 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 
 		getSession().delete(likeUserRequest);
 
-        session.getTransaction().commit();
-        session.close();
-        	
-        return (long) 1;
+		session.getTransaction().commit();
+		session.close();
+
+		return (long) 1;
 	}
-	
-	
-	
 
 }

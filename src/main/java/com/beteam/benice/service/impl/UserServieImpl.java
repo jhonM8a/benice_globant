@@ -77,4 +77,15 @@ public class UserServieImpl implements UserService{
 		usuarioDao.createUser(usuario);
 		
 	}
+
+	@Override
+	public void deletePublicationById(Long publicacion_id) {
+		
+		Publicacion publicacion = usuarioDao.getPublicacionById(publicacion_id);
+		if(publicacion!=null) {
+			System.out.println(publicacion.getUbicacion_id());
+			usuarioDao.deletePublicacion(publicacion);
+		}
+		
+	}
 }

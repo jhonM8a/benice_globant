@@ -11,7 +11,6 @@ public interface UserService {
 
 	public Usuario getDataUser(UserAuthRequest user);
 
-
 	public void updateUser(Usuario usuario);
 
 	public List<Publicacion> getHistoryByUser(Long usuario_id);
@@ -21,6 +20,8 @@ public interface UserService {
 	public List<Publicacion> getPublicaciones();
 
 	public Object createPublication(Publicacion publicacionRequest);
+
+	public void deletePublicationById(Long publicacion_id);
 
 	public Object createLikeUser(Like likeUserRequest);
 
