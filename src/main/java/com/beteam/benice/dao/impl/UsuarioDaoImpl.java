@@ -122,17 +122,17 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 			
 			long count_likes = (long) getSession().createQuery("select count(*) from Like where publicacion_id = :publicacion_id")
 					.setParameter("publicacion_id", publicacion.getPublicacion_id()).uniqueResult();
-			String nombre_suario = (String) getSession().createQuery("select nombre from Usuario where usuario_id = :usuario_id")
-					.setParameter("usuario_id", publicacion.getUsuario_id()).uniqueResult();
 			String like_estado = (String) getSession().createQuery("select 'true' from Like where publicacion_id = :publicacion_id and usuario_id = :usuario_id")
 					.setParameter("publicacion_id", publicacion.getPublicacion_id())
 					.setParameter("usuario_id", usuario_id)
 					.uniqueResult();
 			if(like_estado == null ) like_estado = "false";
 			
+			
 			publicacion.setCount_likes(count_likes);
-			publicacion.setNombre_suario(nombre_suario);
+			publicacion.setNombre_suario(publicacion.getUsuario().getNombre());
 			publicacion.setLike_estado(like_estado);
+			publicacion.setTema_nombre(publicacion.getTema().getTitulo());
 		}
 		
 		return publicaciones;
