@@ -1,6 +1,7 @@
 package com.beteam.benice.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -40,7 +41,7 @@ public class Publicacion implements Serializable {
 	private long usuario_id;
 	
 	@Column(name = "fecha_registro", nullable=false)
-	private String fecha_registro;
+	private Date fecha_registro;
 	
 	@JsonBackReference
 	@ManyToOne(optional=false)
@@ -158,11 +159,11 @@ public class Publicacion implements Serializable {
 		this.ubicacion_id = ubicacion_id;
 	}
 
-	public String getFecha_registro() {
+	public Date getFecha_registro() {
 		return fecha_registro;
 	}
 
-	public void setFecha_registro(String fecha_registro) {
+	public void setFecha_registro(Date fecha_registro) {
 		this.fecha_registro = fecha_registro;
 	}
 	
