@@ -1,6 +1,5 @@
 package com.beteam.benice.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,6 @@ import org.springframework.stereotype.Service;
 import com.beteam.benice.dao.UsuarioDao;
 import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.domain.Usuario;
-import com.beteam.benice.model.Publication;
-import com.beteam.benice.model.SessionBeNice;
 import com.beteam.benice.model.UserAuthRequest;
 import com.beteam.benice.service.UserService;
 
@@ -20,37 +17,49 @@ public class UserServieImpl implements UserService{
 	@Autowired
 	UsuarioDao usuarioDao;
 	
-	public SessionBeNice getDataUser(UserAuthRequest userRequest) {
-		SessionBeNice sessionBeNice = new SessionBeNice();
+	public Usuario getDataUser(UserAuthRequest userRequest) {
 		
 		Usuario usuario = usuarioDao.getUsuarioByUserName(userRequest.getUser(), userRequest.getPassword());
-		sessionBeNice.setName(usuario.getNombre());
 		
-		return sessionBeNice;
+		return usuario;
 	}
 
 	@Override
-	public List<Publication> getPublicaciones() {
+	public List<Publicacion> getPublicaciones() {
 		
 
 		List<Publicacion>   publicaciones = usuarioDao.getPubicaciones();
 		
-		List<Publication> publications = new ArrayList<>();
-		
-		for (Publicacion publicacion : publicaciones) {
+		return publicaciones;
+	}
+
+	@Override
+	public Long createPublication(Publicacion publicacionRequest) {
 			
-			Publication publication = new Publication();
-			publication.setDescription(publicacion.getDescripcion());
-			publication.setImagen(publicacion.getImagen_url());
-			publication.setTema(publicacion.getTema().getTitulo());
-			publication.setUbicacion(publicacion.getUbicacion().getNombre());
-			publication.setLikes(publicacion.getLike_usuarios().size());
-			publication.setUsuario(publicacion.getUsuario().getNombre());
-			publication.setUsuario_id(publicacion.getUsuario().getUsuario_id());
-			publications.add(publication);
-		}
+		Long request = usuarioDao.createPublicacion(publicacionRequest);
+	
+		return request;
+	}
+
+	@Override
+	public void updateUser(Usuario usuario) {
+				
+		usuarioDao.updateUsuario(usuario);
+				
+	}
+
+	@Override
+	public List<Publicacion> getHistoryByUser(Long usuario_id) {
 		
+		List<Publicacion> publicacionesDomain = usuarioDao.getHistoryByUser(usuario_id);
 		
-		return publications;
+		return publicacionesDomain;
+	}
+
+	@Override
+	public void createUser(Usuario usuario) {
+
+		usuarioDao.createUser(usuario);
+		
 	}
 }

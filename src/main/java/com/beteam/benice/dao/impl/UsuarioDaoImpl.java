@@ -2,6 +2,7 @@ package com.beteam.benice.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.beteam.benice.dao.UsuarioDao;
@@ -9,21 +10,49 @@ import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.domain.Usuario;
 
 @Repository
-public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao{
+public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 
 	@Override
 	public Usuario getUsuarioByUserName(String usuerName, String password) {
 		// TODO Auto-generated method stub
-		return (Usuario) getSession().createQuery("from Usuario where username = :username and password_ = :password").
-				setParameter("username", usuerName)
-				.setParameter("password", password) 
-				.uniqueResult();
+		return (Usuario) getSession().createQuery("from Usuario where username = :username and password_ = :password")
+				.setParameter("username", usuerName).setParameter("password", password).uniqueResult();
 	}
 
 	@Override
 	public List<Publicacion> getPubicaciones() {
-	
+
 		return getSession().createQuery("from Publicacion").list();
+	}
+
+	@Override
+	public void updateUsuario(Usuario usuarioDomain) {
+		Session session = getSession();
+		session.beginTransaction();
+
+		getSession().update(usuarioDomain);
+
+		session.getTransaction().commit();
+		session.close();
+
+	}
+
+	@Override
+	public List<Publicacion> getHistoryByUser(Long usuario_id) {
+
+		return getSession().createQuery("from Publicacion where usuario_id = :usuario_id")
+				.setParameter("usuario_id", usuario_id).list();
+	}
+
+	@Override
+	public void createUser(Usuario usuarioDomain) {
+		getSession().save(usuarioDomain);
+	}
+
+	public long createPublicacion(Publicacion publicacionRequest) {
+
+		return (long) getSession().save(publicacionRequest);
+
 	}
 
 }

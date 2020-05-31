@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -13,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -23,6 +27,7 @@ public class Usuario implements Serializable{
 	
 	@Id
 	@Column(name = "usuario_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long usuario_id;
 	
 	@Column(name = "username")
@@ -40,21 +45,26 @@ public class Usuario implements Serializable{
 	@OneToMany(mappedBy = "usuario")
     private List<Publicacion> publicaciones;
 	
-	@ManyToMany
-	@JoinTable(
-	  name = "likes", 
-	  joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id"), 
-	  inverseJoinColumns = @JoinColumn(name = "publicacion_id", referencedColumnName = "publicacion_id"))
-	 @JsonManagedReference
-	private Set<Publicacion> like_publicaciones;
-
-	public Set<Publicacion> getLikePublicaciones() {
-		return like_publicaciones;
-	}
-
-	public void setLikePublicaciones(Set<Publicacion> likePublicaciones) {
-		this.like_publicaciones = likePublicaciones;
-	}
+	
+	@ManyToMany(mappedBy = "like_usuarios", targetEntity = Publicacion.class)
+    @JsonIgnore
+    private List<Publicacion> like_publicaciones;
+	
+//	@ManyToMany
+//	@JoinTable(
+//	  name = "likes", 
+//	  joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id"), 
+//	  inverseJoinColumns = @JoinColumn(name = "publicacion_id", referencedColumnName = "publicacion_id"))
+//	 @JsonManagedReference
+//	private Set<Publicacion> like_publicaciones;
+//
+//	public Set<Publicacion> getLikePublicaciones() {
+//		return like_publicaciones;
+//	}
+//
+//	public void setLikePublicaciones(Set<Publicacion> likePublicaciones) {
+//		this.like_publicaciones = likePublicaciones;
+//	}
 
 	public List<Publicacion> getPublicaciones() {
 		return publicaciones;
