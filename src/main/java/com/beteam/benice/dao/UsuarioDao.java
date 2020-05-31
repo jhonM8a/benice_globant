@@ -10,4 +10,6 @@ public interface UsuarioDao {
 	public Usuario getUsuarioByUserName(String usuerName, String password);
 
 	public List<Publicacion> getPubicaciones();
+
+	public long createPublicacion(Publicacion publicacionRequest);
 }

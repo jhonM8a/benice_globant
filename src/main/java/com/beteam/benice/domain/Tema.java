@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -28,6 +30,7 @@ public class Tema implements Serializable {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
+	//@JsonBackReference
 	@OneToMany(mappedBy = "tema")
     private List<Publicacion> publicaciones;
 	

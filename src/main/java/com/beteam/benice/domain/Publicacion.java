@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -12,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -22,29 +26,52 @@ public class Publicacion implements Serializable {
 	
 	@Id
 	@Column(name = "publicacion_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long publicacion_id;
 	
-	@ManyToOne
-    @JoinColumn(name = "usuario_id")
-	private Usuario usuario;
-
-	@ManyToOne
-    @JoinColumn(name = "tema_id")
-	private Tema tema;
-	
-	@ManyToOne
-    @JoinColumn(name = "ubicacion_id")
-	private Ubicacion ubicacion;
-
 	@Column(name = "descripcion")
 	private String descripcion;
+	
+	@Column(name = "imagen_url")
+	private String imagen_url;
+	
+	@Column(name = "usuario_id", nullable=false)
+	private long usuario_id;
+	
+	@JsonBackReference
+	@ManyToOne(optional=false)
+    @JoinColumn(name = "usuario_id",insertable=false, updatable=false)
+	private Usuario usuario;
+
+	@Column(name = "tema_id", nullable=false)
+	private long tema_id;
+	
+	//@JsonManagedReference
+	@ManyToOne(optional=false)
+	@JsonIgnore
+    @JoinColumn(name = "tema_id", insertable=false, updatable=false)
+	private Tema tema;
+	
+	@Column(name = "ubicacion_id", nullable=false)
+	private long ubicacion_id;
+	
+	//@JsonManagedReference
+		@ManyToOne(optional=false)
+	@JsonIgnore
+    @JoinColumn(name = "ubicacion_id", insertable=false, updatable=false)
+	private Ubicacion ubicacion;
+		
+	
+
+
+	
 	
 	@ManyToMany
 	@JoinTable(
 	  name = "likes", 
 	  joinColumns = @JoinColumn(name = "publicacion_id", referencedColumnName = "publicacion_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id"))
-	 @JsonManagedReference
+	 @JsonIgnore
 	private Set<Usuario> like_usuarios;
 	
 	public Set<Usuario> getLike_usuarios() {
@@ -53,11 +80,7 @@ public class Publicacion implements Serializable {
 	
 	public void setLike_usuarios(Set<Usuario> like_usuarios) {
 		this.like_usuarios = like_usuarios;
-	}
-
-	@Column(name = "imagen_url")
-	private String imagen_url;
-	
+	}	
 		
 	public Long getPublicacion_id() {
 		return publicacion_id;
@@ -107,8 +130,29 @@ public class Publicacion implements Serializable {
 		this.imagen_url = imagen_url;
 	}
 
+	public long getTema_id() {
+		return tema_id;
+	}
 
+	public void setTema_id(long tema_id) {
+		this.tema_id = tema_id;
+	}
 
+	public long getUsuario_id() {
+		return usuario_id;
+	}
+
+	public void setUsuario_id(long usuario_id) {
+		this.usuario_id = usuario_id;
+	}
+
+	public long getUbicacion_id() {
+		return ubicacion_id;
+	}
+
+	public void setUbicacion_id(long ubicacion_id) {
+		this.ubicacion_id = ubicacion_id;
+	}
 	
 	
 	

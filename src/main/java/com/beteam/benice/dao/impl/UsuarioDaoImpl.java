@@ -26,4 +26,15 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao{
 		return getSession().createQuery("from Publicacion").list();
 	}
 
+	@Override
+	public long createPublicacion(Publicacion publicacionRequest) {
+		
+		return (long) getSession().save(publicacionRequest);
+	
+		
+	}
+	
+	
+	
+
 }

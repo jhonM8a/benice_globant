@@ -41,7 +41,7 @@ public class UserContoller {
 	
 	@GetMapping("/publicaciones")
 	@JsonIgnore
-	public List<Publication> getPublicaciones() {
+	public List<Publicacion> getPublicaciones() {
 
 		//userService.getPublicaciones()
 		return userService.getPublicaciones();
@@ -51,6 +51,13 @@ public class UserContoller {
 	@PutMapping("/user")
 	public void updateUser(@RequestBody Usuario usuario) {
 		System.out.println(usuario.getCorreo());
+	}
+	
+	@PostMapping("/publicacion")
+	public Object createPublication(@RequestBody Publicacion publicacionRequest) {
+		
+		System.out.println(publicacionRequest.getDescripcion());
+		return userService.createPublication(publicacionRequest);
 	}
 
 }
