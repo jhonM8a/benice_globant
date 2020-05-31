@@ -110,7 +110,7 @@ public class Publicacion implements Serializable {
 	private long usuario_id;
 	
 	@Column(name = "fecha_registro")
-	private Date fecha_registro;
+	private Date fecha_registro; 
 	
 	@JsonBackReference
 	@ManyToOne(optional=false)
