@@ -18,4 +18,8 @@ public interface UsuarioDao {
 	public void createUser(Usuario usuarioDomain);
 
 	public long createPublicacion(Publicacion publicacionRequest);
+
+	public Publicacion getPublicacionById(Long publicacion_id);
+
+	public void deletePublicacion(Publicacion publicacion);
 }

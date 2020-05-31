@@ -3,6 +3,7 @@ package com.beteam.benice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -38,12 +39,11 @@ public class UserContoller {
 	@JsonIgnore
 	public List<Publicacion> getPublicaciones() {
 
-		//userService.getPublicaciones()
 		return userService.getPublicaciones();
 	}
 	
 	
-	@PutMapping("/user")
+	@PutMapping("/user") 
 	public void updateUser(@RequestBody Usuario usuario) {
 		userService.updateUser(usuario);
 	}
@@ -62,5 +62,10 @@ public class UserContoller {
 	@PostMapping("/user")
 	public void createUser(@RequestBody Usuario usuario) { 
 		userService.createUser(usuario);
+	}
+	
+	@DeleteMapping("/user")
+	public void deletePublicationById(@RequestBody Publicacion publicacion) {
+		userService.deletePublicationById(publicacion.getPublicacion_id());
 	}
 }

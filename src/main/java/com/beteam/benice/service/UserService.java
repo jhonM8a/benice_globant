@@ -20,4 +20,7 @@ public interface UserService {
 	public List<Publicacion> getPublicaciones();
 
 	public Object createPublication(Publicacion publicacionRequest);
+
+
+	public void deletePublicationById(Long publicacion_id);
 }

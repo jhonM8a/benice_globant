@@ -27,6 +27,7 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 
 	@Override
 	public void updateUsuario(Usuario usuarioDomain) {
+		
 		Session session = getSession();
 		session.beginTransaction();
 
@@ -53,6 +54,28 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 
 		return (long) getSession().save(publicacionRequest);
 
+	}
+
+	@Override
+	public Publicacion getPublicacionById(Long publicacion_id) {
+
+		return (Publicacion) getSession().createQuery("from Publicacion where publicacion_id = :publicacion_id")
+				.setParameter("publicacion_id", publicacion_id)
+				.uniqueResult();
+	}
+
+	@Override
+	public void deletePublicacion(Publicacion publicacion) {
+		Session session = getSession();
+		session.beginTransaction();
+		
+		session.delete(publicacion);
+		
+
+		session.getTransaction().commit();
+		session.close();
+
+		
 	}
 
 }
