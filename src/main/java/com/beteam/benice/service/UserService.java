@@ -4,14 +4,20 @@ import java.util.List;
 
 import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
-import com.beteam.benice.model.Publication;
-import com.beteam.benice.model.SessionBeNice;
+import com.beteam.benice.domain.Usuario;
 import com.beteam.benice.model.UserAuthRequest;
 
 public interface UserService {
 
-	public SessionBeNice getDataUser(UserAuthRequest user);
-	
+	public Usuario getDataUser(UserAuthRequest user);
+
+
+	public void updateUser(Usuario usuario);
+
+	public List<Publicacion> getHistoryByUser(Long usuario_id);
+
+	public void createUser(Usuario usuario);
+
 	public List<Publicacion> getPublicaciones();
 
 	public Object createPublication(Publicacion publicacionRequest);

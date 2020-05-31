@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.domain.Usuario;
 import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
@@ -30,7 +29,7 @@ public class UserContoller {
 	private UserService userService;
 
 	@PostMapping("/user/auth")
-	public SessionBeNice authUser(@RequestBody UserAuthRequest userRequest) {
+	public Usuario authUser(@RequestBody UserAuthRequest userRequest) {
 
 		return userService.getDataUser(userRequest);
 	}
@@ -51,13 +50,17 @@ public class UserContoller {
 	
 	@PutMapping("/user")
 	public void updateUser(@RequestBody Usuario usuario) {
-		System.out.println(usuario.getCorreo());
+		userService.updateUser(usuario);
+	}
+	
+	@PostMapping("/user/historys")
+	public  List<Publicacion> getHistoryByUser(@RequestBody Usuario usuario){
+		return userService.getHistoryByUser(usuario.getUsuario_id());
 	}
 	
 	@PostMapping("/publicacion")
 	public Object createPublication(@RequestBody Publicacion publicacionRequest) {
 		
-		System.out.println(publicacionRequest.getDescripcion());
 		return userService.createPublication(publicacionRequest);
 	}
 	
@@ -75,4 +78,8 @@ public class UserContoller {
 		return userService.deleteLikeUser(likeUserRequest);
 	}
 
+	@PostMapping("/user")
+	public void createUser(@RequestBody Usuario usuario) { 
+		userService.createUser(usuario);
+	}
 }
