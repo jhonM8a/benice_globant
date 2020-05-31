@@ -13,7 +13,7 @@ public class Publication implements Serializable{
 	
 	private String imagen;
 	
-	private Long point;
+	private int point;
 	
 	private String ubicacion;
 	
@@ -41,11 +41,11 @@ public class Publication implements Serializable{
 		this.imagen = imagen;
 	}
 
-	public Long getPoint() {
+	public int getPoint() {
 		return point;
 	}
 
-	public void setPoint(Long point) {
+	public void setPoint(int point) {
 		this.point = point;
 	}
 

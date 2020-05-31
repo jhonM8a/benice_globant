@@ -1,5 +1,6 @@
 package com.beteam.benice.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.beteam.benice.dao.UsuarioDao;
 import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.domain.Usuario;
+import com.beteam.benice.model.Publication;
 import com.beteam.benice.model.SessionBeNice;
 import com.beteam.benice.model.UserAuthRequest;
 import com.beteam.benice.service.UserService;
@@ -28,12 +30,25 @@ public class UserServieImpl implements UserService{
 	}
 
 	@Override
-	public List<Publicacion> getPublicaciones() {
+	public List<Publication> getPublicaciones() {
 		
 
 		List<Publicacion>   publicaciones = usuarioDao.getPubicaciones();
 		
+		List<Publication> publications = new ArrayList<>();
 		
-		return null;
+		for (Publicacion publicacion : publicaciones) {
+			
+			Publication publication = new Publication();
+			publication.setDescription(publicacion.getDescripcion());
+			publication.setImagen(publicacion.getImagen_url());
+			publication.setTema(publicacion.getTema().getTitulo());
+			publication.setUbicacion(publicacion.getUbicacion().getNombre());
+			publication.setPoint(publicacion.getLike_usuarios().size());
+			publications.add(publication);
+		}
+		
+		
+		return publications;
 	}
 }
