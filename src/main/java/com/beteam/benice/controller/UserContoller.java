@@ -38,11 +38,11 @@ public class UserContoller {
 		this.userService = userService;
 	}
 	
-	@GetMapping("/publicaciones")
+	@PostMapping("/publicaciones/todas")
 	@JsonIgnore
-	public List<Publicacion> getPublicaciones(@RequestParam(value = "usuario_id") int usuario_id) {
+	public List<Publicacion> getPublicaciones(@RequestBody Usuario usuario) {
 
-		return userService.getPublicaciones(Long.valueOf(usuario_id));
+		return userService.getPublicaciones(usuario);
 	}
 	
 	@PostMapping("/publicaciones_por_tema")
@@ -60,7 +60,15 @@ public class UserContoller {
 	
 	@PostMapping("/user/historys")
 	public  List<Publicacion> getHistoryByUser(@RequestBody Usuario usuario){
-		return userService.getHistoryByUser(usuario.getUsuario_id());
+		
+		System.out.println("usuario.getGeneral()  " + usuario.getGeneral() );
+		if(usuario.getGeneral() == 1 ) {
+			return userService.getPublicaciones(usuario);
+		} else {
+			return userService.getHistoryByUser(usuario.getUsuario_id());
+		}
+		
+		
 	}
 	
 	@PostMapping("/publicacion")

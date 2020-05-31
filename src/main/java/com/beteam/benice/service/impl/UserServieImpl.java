@@ -27,10 +27,10 @@ public class UserServieImpl implements UserService{
 	}
 
 	@Override
-	public List<Publicacion> getPublicaciones(Long usuario_id) {
+	public List<Publicacion> getPublicaciones(Usuario usuarioRequest) {
 		
 
-		List<Publicacion>   publicaciones = usuarioDao.getPubicaciones(usuario_id);
+		List<Publicacion> publicaciones = usuarioDao.getPubicaciones(usuarioRequest);
 		
 		return publicaciones;
 	}
@@ -66,6 +66,8 @@ public class UserServieImpl implements UserService{
 
 	@Override
 	public List<Publicacion> getHistoryByUser(Long usuario_id) {
+		
+		
 		
 		List<Publicacion> publicacionesDomain = usuarioDao.getHistoryByUser(usuario_id);
 		

@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,6 +26,26 @@ public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	@Transient
+	private int general;
+	
+	
+	public int getGeneral() {
+		return general;
+	}
+
+	public void setGeneral(int general) {
+		this.general = general;
+	}
+
+	public List<Publicacion> getLike_publicaciones() {
+		return like_publicaciones;
+	}
+
+	public void setLike_publicaciones(List<Publicacion> like_publicaciones) {
+		this.like_publicaciones = like_publicaciones;
+	}
+
 	@Id
 	@Column(name = "usuario_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
