@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.beteam.benice.domain.Like;
@@ -39,9 +40,9 @@ public class UserContoller {
 	
 	@GetMapping("/publicaciones")
 	@JsonIgnore
-	public List<Publicacion> getPublicaciones(@RequestBody Usuario usuarioRequest) {
+	public List<Publicacion> getPublicaciones(@RequestParam(value = "usuario_id") int usuario_id) {
 
-		return userService.getPublicaciones(usuarioRequest);
+		return userService.getPublicaciones(Long.valueOf(usuario_id));
 	}
 	
 	@GetMapping("/publicaciones_por_tema")
