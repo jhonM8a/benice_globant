@@ -11,12 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.beteam.benice.domain.Publicacion;
-import com.beteam.benice.domain.Usuario;
 import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
-import com.beteam.benice.model.Publication;
-import com.beteam.benice.model.SessionBeNice;
+import com.beteam.benice.domain.Usuario;
 import com.beteam.benice.model.UserAuthRequest;
 import com.beteam.benice.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
