@@ -9,13 +9,17 @@ public class Publication implements Serializable{
 
 	private String Description;
 	
-	private String tag;
+	private String tema;
 	
-	private String photo;
+	private String imagen;
 	
-	private Long point;
+	private int likes;
 	
-	private String location;
+	private String ubicacion;
+	
+	private String usuario;
+	
+	private Long usuario_id;
 	
 	public String getDescription() {
 		return Description;
@@ -25,35 +29,51 @@ public class Publication implements Serializable{
 		Description = description;
 	}
 
-	public String getTag() {
-		return tag;
+	public String getTema() {
+		return tema;
 	}
 
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setTema(String tema) {
+		this.tema = tema;
 	}
 
-	public String getPhoto() {
-		return photo;
+	public String getImagen() {
+		return imagen;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
-	public Long getPoint() {
-		return point;
+	public int getLikes() {
+		return likes;
 	}
 
-	public void setPoint(Long point) {
-		this.point = point;
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getUbicacion() {
+		return ubicacion;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public Long getUsuario_id() {
+		return usuario_id;
+	}
+
+	public void setUsuario_id(Long usuario_id) {
+		this.usuario_id = usuario_id;
 	}
 }
