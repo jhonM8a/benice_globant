@@ -31,12 +31,16 @@ public class Publicacion implements Serializable {
 	
 	@Column(name = "descripcion")
 	private String descripcion;
-	
+
+
 	@Column(name = "imagen_url")
 	private String imagen_url;
 	
 	@Column(name = "usuario_id", nullable=false)
 	private long usuario_id;
+	
+	@Column(name = "fecha_registro", nullable=false)
+	private String fecha_registro;
 	
 	@JsonBackReference
 	@ManyToOne(optional=false)
@@ -56,7 +60,7 @@ public class Publicacion implements Serializable {
 	private long ubicacion_id;
 	
 	//@JsonManagedReference
-		@ManyToOne(optional=false)
+	@ManyToOne(optional=false)
 	@JsonIgnore
     @JoinColumn(name = "ubicacion_id", insertable=false, updatable=false)
 	private Ubicacion ubicacion;
@@ -152,6 +156,14 @@ public class Publicacion implements Serializable {
 
 	public void setUbicacion_id(long ubicacion_id) {
 		this.ubicacion_id = ubicacion_id;
+	}
+
+	public String getFecha_registro() {
+		return fecha_registro;
+	}
+
+	public void setFecha_registro(String fecha_registro) {
+		this.fecha_registro = fecha_registro;
 	}
 	
 	

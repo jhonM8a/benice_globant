@@ -37,29 +37,5 @@ public class Like implements Serializable {
 	public void setUsuario_id(Long usuario_id) {
 		this.usuario_id = usuario_id;
 	}
-
-	@ManyToOne
-    @JoinColumn(name = "publicacion_id")
-	private Publicacion publicacion;
-	
-	@ManyToOne
-    @JoinColumn(name = "usuario_id")
-	private Usuario usuario;
-
-	public Publicacion getPublicacion() {
-		return publicacion;
-	}
-
-	public void setPublicacion(Publicacion publicacion) {
-		this.publicacion = publicacion;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 	
 }

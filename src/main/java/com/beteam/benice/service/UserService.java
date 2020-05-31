@@ -2,6 +2,7 @@ package com.beteam.benice.service;
 
 import java.util.List;
 
+import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.model.Publication;
 import com.beteam.benice.model.SessionBeNice;
@@ -14,4 +15,8 @@ public interface UserService {
 	public List<Publicacion> getPublicaciones();
 
 	public Object createPublication(Publicacion publicacionRequest);
+
+	public Object createLikeUser(Like likeUserRequest);
+
+	public Object deleteLikeUser(Like likeUserRequest);
 }

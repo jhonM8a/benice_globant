@@ -3,6 +3,7 @@ package com.beteam.benice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.beteam.benice.domain.Usuario;
-
+import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.model.Publication;
 import com.beteam.benice.model.SessionBeNice;
@@ -58,6 +59,20 @@ public class UserContoller {
 		
 		System.out.println(publicacionRequest.getDescripcion());
 		return userService.createPublication(publicacionRequest);
+	}
+	
+	@PostMapping("/like_user")
+	public Object setLikeUser(@RequestBody Like likeUserRequest) {
+		
+		System.out.println(likeUserRequest.getUsuario_id());
+		return userService.createLikeUser(likeUserRequest);
+	}
+	
+	@DeleteMapping("/dislike_user")
+	public Object setDislikeUser(@RequestBody Like likeUserRequest) {
+		
+		System.out.println(likeUserRequest.getUsuario_id());
+		return userService.deleteLikeUser(likeUserRequest);
 	}
 
 }
