@@ -3,6 +3,7 @@ package com.beteam.benice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,6 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.domain.Usuario;
+import com.beteam.benice.domain.Like;
+import com.beteam.benice.domain.Publicacion;
+import com.beteam.benice.model.Publication;
+import com.beteam.benice.model.SessionBeNice;
 import com.beteam.benice.model.UserAuthRequest;
 import com.beteam.benice.service.UserService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,12 +43,11 @@ public class UserContoller {
 	@JsonIgnore
 	public List<Publicacion> getPublicaciones() {
 
-		//userService.getPublicaciones()
 		return userService.getPublicaciones();
 	}
 	
 	
-	@PutMapping("/user")
+	@PutMapping("/user") 
 	public void updateUser(@RequestBody Usuario usuario) {
 		userService.updateUser(usuario);
 	}
@@ -58,9 +62,28 @@ public class UserContoller {
 		
 		return userService.createPublication(publicacionRequest);
 	}
+	
+	@PostMapping("/like_user")
+	public Object setLikeUser(@RequestBody Like likeUserRequest) {
+		
+		System.out.println(likeUserRequest.getUsuario_id());
+		return userService.createLikeUser(likeUserRequest);
+	}
+	
+	@DeleteMapping("/dislike_user")
+	public Object setDislikeUser(@RequestBody Like likeUserRequest) {
+		
+		System.out.println(likeUserRequest.getUsuario_id());
+		return userService.deleteLikeUser(likeUserRequest);
+	}
 
 	@PostMapping("/user")
 	public void createUser(@RequestBody Usuario usuario) { 
 		userService.createUser(usuario);
+	}
+	
+	@DeleteMapping("/user")
+	public void deletePublicationById(@RequestBody Publicacion publicacion) {
+		userService.deletePublicationById(publicacion.getPublicacion_id());
 	}
 }

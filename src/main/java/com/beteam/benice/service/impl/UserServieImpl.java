@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.beteam.benice.dao.UsuarioDao;
+import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
 import com.beteam.benice.domain.Usuario;
 import com.beteam.benice.model.UserAuthRequest;
@@ -42,6 +43,20 @@ public class UserServieImpl implements UserService{
 	}
 
 	@Override
+	public Long createLikeUser(Like likeUserRequest) {
+		
+		Long request = usuarioDao.createLikeUser(likeUserRequest);
+		
+		return request;
+	}
+
+	@Override
+	public Object deleteLikeUser(Like likeUserRequest) {
+		Long request = usuarioDao.deleteLikeUser(likeUserRequest);
+		return request;
+	}
+
+	@Override
 	public void updateUser(Usuario usuario) {
 				
 		usuarioDao.updateUsuario(usuario);
@@ -60,6 +75,17 @@ public class UserServieImpl implements UserService{
 	public void createUser(Usuario usuario) {
 
 		usuarioDao.createUser(usuario);
+		
+	}
+
+	@Override
+	public void deletePublicationById(Long publicacion_id) {
+		
+		Publicacion publicacion = usuarioDao.getPublicacionById(publicacion_id);
+		if(publicacion!=null) {
+			System.out.println(publicacion.getUbicacion_id());
+			usuarioDao.deletePublicacion(publicacion);
+		}
 		
 	}
 }
