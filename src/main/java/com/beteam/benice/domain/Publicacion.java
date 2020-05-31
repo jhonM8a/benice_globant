@@ -33,11 +33,34 @@ public class Publicacion implements Serializable {
 	
 	@Transient
 	private String like_estado;
-	
+
 	@Transient
 	private String tema_nombre;
+	
+	@Transient
+	private Long fecha_diferencia_segundos;
+	
+	@Transient
+	private String fecha_texto;
 
+	
+	public Long getFecha_diferencia_segundos() {
+		return fecha_diferencia_segundos;
+	}
 
+	public void setFecha_diferencia_segundos(Long fecha_diferencia_segundos) {
+		this.fecha_diferencia_segundos = fecha_diferencia_segundos;
+	}
+
+	public String getFecha_texto() {
+		return fecha_texto;
+	}
+
+	public void setFecha_texto(String fecha_texto) {
+		this.fecha_texto = fecha_texto;
+	}
+
+	
 
 	public String getTema_nombre() {
 		return tema_nombre;
@@ -86,7 +109,7 @@ public class Publicacion implements Serializable {
 	@Column(name = "usuario_id", nullable=false)
 	private long usuario_id;
 	
-	@Column(name = "fecha_registro", nullable=false)
+	@Column(name = "fecha_registro")
 	private Date fecha_registro;
 	
 	@JsonBackReference

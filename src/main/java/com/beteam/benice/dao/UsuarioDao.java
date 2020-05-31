@@ -11,7 +11,7 @@ public interface UsuarioDao {
 
 	public Usuario getUsuarioByUserName(String usuerName, String password);
 
-	public List<Publicacion> getPubicaciones(Long usuario_id);
+	public List<Publicacion> getPubicaciones(Usuario usuarioRequest);
 
 	public void updateUsuario(Usuario usuarioDomain);
 

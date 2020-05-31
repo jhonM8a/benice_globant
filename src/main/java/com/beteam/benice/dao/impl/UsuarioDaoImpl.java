@@ -1,5 +1,6 @@
 package com.beteam.benice.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -17,16 +18,16 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 	@Override
 	public Usuario getUsuarioByUserName(String usuerName, String password) {
 		// TODO Auto-generated method stub
-		return (Usuario) getSession().createQuery("from Usuario where username = :username and password_ = :password")
+		return (Usuario) getSession().createQuery("from Usuario where username = :username and password_ = :password order by fecha_registro desc")
 				.setParameter("username", usuerName).setParameter("password", password).uniqueResult();
 	}
 
 	@Override
-	public List<Publicacion> getPubicaciones(Long usuario_id) {
+	public List<Publicacion> getPubicaciones(Usuario usuarioRequest) {
 
-		List<Publicacion> publicaciones = getSession().createQuery("from Publicacion").list();
+		List<Publicacion> publicaciones = getSession().createQuery("from Publicacion order by fecha_registro desc").list();
 		
-		return getInfoAdicionalPublicaciones(usuario_id,publicaciones);
+		return getInfoAdicionalPublicaciones(usuarioRequest.getUsuario_id(),publicaciones);
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 	@Override
 	public List<Publicacion> getHistoryByUser(Long usuario_id) {
 
-		List<Publicacion> publicaciones = getSession().createQuery("from Publicacion where usuario_id = :usuario_id")
+		List<Publicacion> publicaciones = getSession().createQuery("from Publicacion where usuario_id = :usuario_id order by fecha_registro desc")
 		.setParameter("usuario_id", usuario_id).list();
 		
 		return getInfoAdicionalPublicaciones(usuario_id, publicaciones);
@@ -58,6 +59,8 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 
 	public long createPublicacion(Publicacion publicacionRequest) {
 
+		publicacionRequest.setFecha_registro(new Date());
+		
 		return (long) getSession().save(publicacionRequest);
 
 	}
@@ -110,7 +113,7 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 	public List<Publicacion> getPublicacionesPorTema(Tema temaRequest) {
 		
 		
-		List<Publicacion> publicaciones = getSession().createQuery("from Publicacion where tema_id = :tema_id")
+		List<Publicacion> publicaciones = getSession().createQuery("from Publicacion where tema_id = :tema_id order by fecha_registro desc")
 											.setParameter("tema_id", temaRequest.getTema_id()).list();
 		
 		return getInfoAdicionalPublicaciones(temaRequest.getUsuario_logeado_id(), publicaciones);
@@ -118,6 +121,7 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 	
 	private List<Publicacion> getInfoAdicionalPublicaciones(long usuario_id, List<Publicacion> publicaciones){
 		
+		Date date = new Date();
 		for (Publicacion publicacion : publicaciones) {
 			
 			long count_likes = (long) getSession().createQuery("select count(*) from Like where publicacion_id = :publicacion_id")
@@ -128,6 +132,12 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 					.uniqueResult();
 			if(like_estado == null ) like_estado = "false";
 			
+			if(publicacion.getFecha_registro() !=null) {
+				
+				publicacion.setFecha_texto(publicacion.getFecha_registro().toString());
+				//Diefrencia en segundos
+				publicacion.setFecha_diferencia_segundos((date.getTime() - publicacion.getFecha_registro().getTime())/1000);
+			}
 			
 			publicacion.setCount_likes(count_likes);
 			publicacion.setNombre_suario(publicacion.getUsuario().getNombre());
