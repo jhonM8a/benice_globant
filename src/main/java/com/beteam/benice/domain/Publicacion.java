@@ -27,8 +27,30 @@ public class Publicacion implements Serializable {
 	
 	@Transient
 	private Long count_likes;
+	
+	@Transient
+	private String nombre_suario;
+	
+	@Transient
+	private String like_estado;
 
 
+
+	public String getNombre_suario() {
+		return nombre_suario;
+	}
+
+	public void setNombre_suario(String nombre_suario) {
+		this.nombre_suario = nombre_suario;
+	}
+
+	public String getLike_estado() {
+		return like_estado;
+	}
+
+	public void setLike_estado(String like_estado) {
+		this.like_estado = like_estado;
+	}
 
 	public Long getCount_likes() {
 		return count_likes;

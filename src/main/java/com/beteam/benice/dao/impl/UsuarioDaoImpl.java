@@ -22,19 +22,11 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 	}
 
 	@Override
-	public List<Publicacion> getPubicaciones() {
+	public List<Publicacion> getPubicaciones(Usuario usuarioRequest) {
 
 		List<Publicacion> publicaciones = getSession().createQuery("from Publicacion").list();
-		for (Publicacion publicacion : publicaciones) {
-			
-			long count_likes = (long) getSession().createQuery("select count(*) from Like where publicacion_id = :publicacion_id")
-					.setParameter("publicacion_id", publicacion.getPublicacion_id()).uniqueResult();
-			//long count_likes_ = 5;
-					
-			publicacion.setCount_likes(count_likes);
-		}
 		
-		return publicaciones;
+		return getInfoAdicionalPublicaciones(usuarioRequest.getUsuario_id(),publicaciones);
 	}
 
 	@Override
@@ -53,8 +45,10 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 	@Override
 	public List<Publicacion> getHistoryByUser(Long usuario_id) {
 
-		return getSession().createQuery("from Publicacion where usuario_id = :usuario_id")
-				.setParameter("usuario_id", usuario_id).list();
+		List<Publicacion> publicaciones = getSession().createQuery("from Publicacion where usuario_id = :usuario_id")
+		.setParameter("usuario_id", usuario_id).list();
+		
+		return getInfoAdicionalPublicaciones(usuario_id, publicaciones);
 	}
 
 	@Override
@@ -118,17 +112,30 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 		
 		List<Publicacion> publicaciones = getSession().createQuery("from Publicacion where tema_id = :tema_id")
 											.setParameter("tema_id", temaRequest.getTema_id()).list();
+		
+		return getInfoAdicionalPublicaciones(temaRequest.getUsuario_logeado_id(), publicaciones);
+	}
+	
+	private List<Publicacion> getInfoAdicionalPublicaciones(long usuario_id, List<Publicacion> publicaciones){
+		
 		for (Publicacion publicacion : publicaciones) {
 			
 			long count_likes = (long) getSession().createQuery("select count(*) from Like where publicacion_id = :publicacion_id")
 					.setParameter("publicacion_id", publicacion.getPublicacion_id()).uniqueResult();
-					
+			String nombre_suario = (String) getSession().createQuery("select nombre from Usuario where usuario_id = :usuario_id")
+					.setParameter("usuario_id", publicacion.getUsuario_id()).uniqueResult();
+			String like_estado = (String) getSession().createQuery("select 'true' from Like where publicacion_id = :publicacion_id and usuario_id = :usuario_id")
+					.setParameter("publicacion_id", publicacion.getPublicacion_id())
+					.setParameter("usuario_id", usuario_id)
+					.uniqueResult();
+			if(like_estado == null ) like_estado = "false";
+			
 			publicacion.setCount_likes(count_likes);
+			publicacion.setNombre_suario(nombre_suario);
+			publicacion.setLike_estado(like_estado);
 		}
 		
 		return publicaciones;
-		
-		
 	}
 
 }

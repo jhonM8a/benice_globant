@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,6 +21,17 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Tema implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Transient
+	private Long usuario_logeado_id;
+	
+	public Long getUsuario_logeado_id() {
+		return usuario_logeado_id;
+	}
+
+	public void setUsuario_logeado_id(Long usuario_logeado_id) {
+		this.usuario_logeado_id = usuario_logeado_id;
+	}
+
 	@Id
 	@Column(name = "tema_id")
 	private Long tema_id;
