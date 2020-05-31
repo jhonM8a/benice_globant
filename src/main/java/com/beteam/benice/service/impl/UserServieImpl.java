@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.beteam.benice.dao.UsuarioDao;
 import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
+import com.beteam.benice.domain.Tema;
 import com.beteam.benice.domain.Usuario;
 import com.beteam.benice.model.UserAuthRequest;
 import com.beteam.benice.service.UserService;
@@ -87,5 +88,12 @@ public class UserServieImpl implements UserService{
 			usuarioDao.deletePublicacion(publicacion);
 		}
 		
+	}
+
+	@Override
+	public List<Publicacion> getPublicacionesPorTema(Tema temaRequest) {
+		List<Publicacion>   publicaciones = usuarioDao.getPublicacionesPorTema(temaRequest);
+		
+		return publicaciones;
 	}
 }

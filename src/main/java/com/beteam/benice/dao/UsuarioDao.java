@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.beteam.benice.domain.Like;
 import com.beteam.benice.domain.Publicacion;
+import com.beteam.benice.domain.Tema;
 import com.beteam.benice.domain.Usuario;
 
 public interface UsuarioDao {
@@ -27,4 +28,6 @@ public interface UsuarioDao {
 	public Long createLikeUser(Like likeUserRequest);
 
 	public Long deleteLikeUser(Like likeUserRequest);
+
+	public List<Publicacion> getPublicacionesPorTema(Tema temaRequest);
 }
