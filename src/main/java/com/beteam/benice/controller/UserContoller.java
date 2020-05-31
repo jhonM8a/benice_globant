@@ -88,7 +88,7 @@ public class UserContoller {
 		userService.createUser(usuario);
 	}
 	
-	@DeleteMapping("/user")
+	@PostMapping("/user")
 	public void deletePublicationById(@RequestBody Publicacion publicacion) {
 		userService.deletePublicationById(publicacion.getPublicacion_id());
 	}
