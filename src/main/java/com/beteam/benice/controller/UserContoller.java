@@ -45,7 +45,7 @@ public class UserContoller {
 		return userService.getPublicaciones(Long.valueOf(usuario_id));
 	}
 	
-	@GetMapping("/publicaciones_por_tema")
+	@PostMapping("/publicaciones_por_tema")
 	@JsonIgnore
 	public List<Publicacion> getPublicacionesPorTema(@RequestBody Tema temaRequest) {
 
