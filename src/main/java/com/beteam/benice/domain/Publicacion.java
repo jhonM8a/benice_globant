@@ -33,8 +33,19 @@ public class Publicacion implements Serializable {
 	
 	@Transient
 	private String like_estado;
+	
+	@Transient
+	private String tema_nombre;
 
 
+
+	public String getTema_nombre() {
+		return tema_nombre;
+	}
+
+	public void setTema_nombre(String tema_nombre) {
+		this.tema_nombre = tema_nombre;
+	}
 
 	public String getNombre_suario() {
 		return nombre_suario;
