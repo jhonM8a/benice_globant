@@ -23,6 +23,16 @@ public class UsuarioDaoImpl extends AbstractSession implements UsuarioDao {
 	@Override
 	public List<Publicacion> getPubicaciones() {
 
+		///List<Publicacion> publicaciones = getSession().createQuery("from Publicacion").list();
+//		for (Publicacion publicacion : publicaciones) {
+//			
+////			long count_likes = (long) getSession().createQuery("select count(*) from Like where publicacion_id = :publicacion_id")
+////					.setParameter("publicacion_id", publicacion.getPublicacion_id()).uniqueResult();
+//			long count_likes = 5;
+//					
+//			publicacion.setCount_likes(count_likes);
+//		}
+		
 		return getSession().createQuery("from Publicacion").list();
 	}
 

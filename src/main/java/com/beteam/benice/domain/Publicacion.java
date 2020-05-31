@@ -25,6 +25,8 @@ public class Publicacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
+	private Long count_likes;
+
 	@Id
 	@Column(name = "publicacion_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -66,11 +68,6 @@ public class Publicacion implements Serializable {
     @JoinColumn(name = "ubicacion_id", insertable=false, updatable=false)
 	private Ubicacion ubicacion;
 		
-	
-
-
-	
-	
 	@ManyToMany
 	@JoinTable(
 	  name = "likes", 
@@ -167,7 +164,13 @@ public class Publicacion implements Serializable {
 		this.fecha_registro = fecha_registro;
 	}
 	
-	
+	public Long getCount_likes() {
+		return count_likes;
+	}
+
+	public void setCount_likes(Long count_likes) {
+		this.count_likes = count_likes;
+	}
 	
 
 }
